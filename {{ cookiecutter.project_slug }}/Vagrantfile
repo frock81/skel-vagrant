@@ -1,0 +1,131 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# The box to be used by Vagrant.
+VAGRANT_BOX = "{{ cookiecutter.vagrant_box }}"
+
+# Number of CPUs allocated to the virtual machine instances.
+VM_CPUS = {{ cookiecutter.vm_cpus }}
+
+# Total of RAM memory in megabytes allocated to the vm instances.
+VM_MEMORY = {{ cookiecutter.vm_memory }}
+
+# The prefix for the hostname and virtual machine name.
+INSTANCE_NAME = "{{ cookiecutter.vm_name }}"
+
+# Start of the nodes. If 0 it will foo-0, foo-1 and so on. If 1 it will
+# be foo-1, foo-2...
+INSTANCE_START = {{ cookiecutter.instance_start }}
+
+# The last instance index. Will determine the amount of foos (except
+# for the controller which has it's own section). The default with
+# INSTANCE_START=1 and INSTANCE_END=2 will give two nodes, foo-1 and
+# foo-2.
+INSTANCE_END = {{ cookiecutter.instance_end }}
+
+# The prefix for the IP address. The ip address for the machines will be
+# generated using the instance index and the prefix. So in the default
+# confing it will be 192.168.128.11 for foo-1, 192.168.128.12 for foo-2
+# and so on. Example: 192.168.128.1
+IP_PREFIX = "{{ cookiecutter.ip_prefix }}"
+
+# The virtual machine name and hostname for the controller machine, the
+# one that will provision the other with Ansible (manager). It is useful
+# for mixed environments that uses Linux, Windows, etc and makes it
+# unecessary to have Ansible installed in the machine running Vagrant.
+CONTROLLER_HOSTNAME = "#{INSTANCE_NAME}-ctrl"
+
+# The IP address for the controller machine. In the default config it
+# will be 192.168.128.10.
+CONTROLLER_IP_ADDRESS = "#{IP_PREFIX}0"
+
+# Sets guest environment variables.
+# @see https://github.com/hashicorp/vagrant/issues/7015
+$set_environment_variables = <<SCRIPT
+tee "/etc/profile.d/myvars.sh" > "/dev/null" <<EOF
+# Ansible environment variables.
+export ANSIBLE_RETRY_FILES_ENABLED=0
+EOF
+SCRIPT
+
+VAGRANT_ROOT = File.dirname(File.expand_path(__FILE__))
+
+Vagrant.configure("2") do |config|
+  config.ssh.insert_key = false
+  config.ssh.private_key_path = "./ansible/insecure_private_key"
+  config.vm.box = VAGRANT_BOX
+
+  (INSTANCE_START..INSTANCE_END).each do |i|
+    config.vm.define "#{INSTANCE_NAME}-#{i}" do |machine|
+      machine.vm.provider "virtualbox" do |vbox|
+        vbox.name = "#{INSTANCE_NAME}-#{i}"
+
+        # Uncomment if you want to disable VT-x to use with KVM.
+        # vbox.customize ["modifyvm", :id, "--hwvirtex", "off"]
+
+        # Uncomment to enable nested virtualization.
+        # vbox.customize ["modifyvm", :id, "--nested-hw-virt", "on"]
+
+        # Uncoment to add more disks. See vboxmanage documentation.
+        # disk_size_in_mb = 128
+        # disks_total = 4
+        # for j in 1..disks_total
+        #   file_to_disk = File.join(VAGRANT_ROOT, '.vagrant', "#{INSTANCE_NAME}-#{i}-disk-#{j}.vdi")
+        #   unless File.exist?(file_to_disk)
+        #     vbox.customize ['createmedium', 'disk',
+        #       '--filename', file_to_disk,
+        #       '--size', disk_size_in_mb,
+        #       '--variant', 'Standard']
+        #   end
+        #   vbox.customize ['storageattach', :id,
+        #     '--storagectl', 'SCSI',
+        #     '--port', 2 + j - 1,
+        #     '--device', 0,
+        #     '--type', 'hdd',
+        #     '--medium', file_to_disk]
+        # end
+      end
+      machine.vm.hostname = "#{INSTANCE_NAME}-#{i}"
+      machine.vm.network "private_network", ip: "#{IP_PREFIX}#{i}"
+    end
+  end
+
+  # The controller that will provision other nodes.
+  config.vm.define CONTROLLER_HOSTNAME do |machine|
+    machine.vm.provider "virtualbox" do |vbox|
+      vbox.name = CONTROLLER_HOSTNAME
+
+      # Uncomment if you want to disable VT-x to use with KVM.
+      # vbox.customize ["modifyvm", :id, "--hwvirtex", "off"]
+    end
+    machine.vm.hostname = CONTROLLER_HOSTNAME
+    machine.vm.network "private_network", ip: CONTROLLER_IP_ADDRESS
+    # Vault passwords in home dir in order to not leave the key together with
+    # the lock (useful to synchronize projects inside Dropbox/Gdrive).
+    machine.vm.synced_folder "~/.ansible_secret", \
+      "/home/vagrant/.ansible_secret"
+    machine.vm.synced_folder "ansible", "/etc/ansible"
+    machine.vm.provision "shell", inline: $set_environment_variables, \
+      run: "always"
+    machine.vm.provision "shell", path: "scripts/bootstrap.sh"
+    machine.vm.provision "ansible_local" do |ansible|
+      ansible.compatibility_mode = "2.0"
+      ansible.install = false
+      ansible.provisioning_path = "/etc/ansible"
+      ansible.playbook = ENV["ANSIBLE_PLAYBOOK"] ? ENV["ANSIBLE_PLAYBOOK"] \
+        : "playbook.yml"
+      ansible.inventory_path = "hosts-dev.ini"
+      ansible.become = true
+      ansible.limit = ENV['ANSIBLE_LIMIT'] ? ENV['ANSIBLE_LIMIT'] : "all"
+      ansible.vault_password_file = "/home/vagrant/.ansible_secret/vault_pass_insecure"
+      ansible.tags = ENV['ANSIBLE_TAGS']
+      ansible.verbose = ENV['ANSIBLE_VERBOSE'] ? ENV['ANSIBLE_VERBOSE'] \
+        : "v"
+    end
+  end
+
+  config.vm.provider "virtualbox" do |vbox|
+    vbox.memory = VM_MEMORY
+    vbox.cpus = VM_CPUS
+  end
+end

@@ -1,17 +1,22 @@
 # Skel Vagrant
 
-A **simple** [Ansible](https://www.ansible.com/) based project skeleton using [Vagrant](https://www.vagrantup.com/), [Virtualbox](https://www.virtualbox.org/) and [Cookiecutter](https://github.com/cookiecutter/cookiecutter) as tooling.
-
-
-Vagrant provides the virtual machines (*vms*, in this article) configuration that will be used in the local development environment (that shall move to a dev, staging or production environment afterwards).
-
-Virtualbox is used as the Vagrant provider because the portability between Linux, Windows and Mac and the ease of use also.
-
-Cookiecutter moves the project template to the real one.
+A **simple** skeleton for  [Ansible](https://www.ansible.com/) based IT infrastructure projects that use [Vagrant](https://www.vagrantup.com/) and [Virtualbox](https://www.virtualbox.org/) as tooling for local development. This way one can create, develop and test IT infrastructure scenarios in an local computer.
 
 ## Requirements
 
-Working Vagrant, Virtualbox and Cookiecutter (and so a Python interpreter) installation. See each tool site for details. Ansible is not required to create the new project boilerplate.
+Tooling:
+
+- [Cookiecutter](https://github.com/cookiecutter/cookiecutter) (and so a Python interpreter)
+- Virtualbox
+- Vagrant
+
+The only tool needed to create the boilerplate project is Cookiecutter, but, for the project to be useful, one needs a Vagrant and Virtualbox working installation. See each tool site for details about install and config. Since it aims Ansible projects, it is assumed that there will be a working Ansible installation too.
+
+Cookiecutter creates the real project boilerplate from the project template.
+
+Vagrant provides the virtual machines (*vms*, in this article) configuration that will be used in the local development environment (that shall move to a dev, staging or production env afterwards).
+
+Virtualbox was chosen as the Vagrant provider because the portability between Linux, Windows and Mac and the ease of use also.
 
 ## Running
 
@@ -25,7 +30,7 @@ The core of the project is the cookiecutter.json file, that holds the main proje
 
 ## File cookiecutter.json
 
-The file holds the following keys:
+The file holds the following keys, that will be prompted when "cookiecutting" the project:
 
 ##### project_name
 

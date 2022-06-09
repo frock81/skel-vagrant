@@ -28,6 +28,8 @@ Virtualbox was chosen as the Vagrant provider because the portability between Li
 
 The core of the project is the cookiecutter.json file, that holds the main project config, and the Vagrantfile inside the template directory (`{{ cookiecutter.project_slug }}`), that holds the virtual machines config.
 
+Besides Ansible, Vagrant and Virtualbox, although not required, the new project will expect some useful tooling like *direnv* and  *todo.sh*. Those can be easily cleaned/removed by deleting the *.envrc* file and *todo* directory.
+
 ## File cookiecutter.json
 
 The file holds the following keys, that will be prompted when "cookiecutting" the project:

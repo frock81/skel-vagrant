@@ -13,9 +13,15 @@ Cookiecutter moves the project template to the real one.
 
 Working Vagrant, Virtualbox and Cookiecutter (and so a Python interpreter) installation. See each tool site for details. Ansible is not required to create the new project boilerplate.
 
+## Running
+
+> **TO BE REVIEWED**: review these steps
+
+ 1. **"Cookiecutter" the project**: `cookiecutter https://github.com/frock81/skel-vagrant`
+
 ## More
 
-The core of the project is the cookiecutter.json file, that holds the main project config, and the Vagrantfile inside the template directory (`{{ cookiecutter.project_slug }}`), that holds the virtual machines .
+The core of the project is the cookiecutter.json file, that holds the main project config, and the Vagrantfile inside the template directory (`{{ cookiecutter.project_slug }}`), that holds the virtual machines config.
 
 ## File cookiecutter.json
 

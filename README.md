@@ -22,7 +22,7 @@ Virtualbox was chosen as the Vagrant provider because the portability between Li
 
 > **TO BE REVIEWED**: review these steps
 
- 1. **"Cookiecutter" the project**: `cookiecutter https://github.com/frock81/skel-vagrant`
+ 1. **"Cookiecutter" the project**: `cookiecutter https://github.com/frock81/skel-vagrant` or, if it is not the first time, `cookiecutter skel-vagrant`
 
 ## More
 

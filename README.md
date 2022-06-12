@@ -4,7 +4,7 @@ A **simple** skeleton for  [Ansible](https://www.ansible.com/) based IT infrastr
 
 ## Requirements
 
-Tooling:
+Tools:
 
 - [Cookiecutter](https://github.com/cookiecutter/cookiecutter) (and so a Python interpreter)
 - Virtualbox

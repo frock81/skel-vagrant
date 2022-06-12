@@ -22,11 +22,13 @@ Virtualbox was chosen as the Vagrant provider because the portability between Li
 
 > **TO BE REVIEWED**: review these steps
 
- 1. **"Cookiecutter" the project**: `cookiecutter https://github.com/frock81/skel-vagrant` or, if it is not the first time, `cookiecutter skel-vagrant`
+ 1. **"Cookiecutter" the project**: `cookiecutter https://github.com/frock81/skel-vagrant` or, if it is not the first time, `cookiecutter skel-vagrant` (you will be prompted for input)
+
+The new project will be created in the `project_slug` directory, passed as input to the cookiecutter comand.
 
 ## More
 
-The core of the project is the cookiecutter.json file, that holds the main project config, and the Vagrantfile inside the template directory (`{{ cookiecutter.project_slug }}`), that holds the virtual machines config.
+The core of the project is the cookiecutter.json file, that holds the main project config, and the Vagrantfile inside the template directory (_{{ cookiecutter.project_slug }}_), that holds the virtual machines config.
 
 Besides Ansible, Vagrant and Virtualbox, although not required, the new project will expect some useful tooling like *direnv* and  *todo.sh*. Those can be easily cleaned/removed by deleting the *.envrc* file and *todo* directory.
 

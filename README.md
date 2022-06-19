@@ -1,6 +1,6 @@
 # Skel Vagrant
 
-A **simple** skeleton for  [Ansible](https://www.ansible.com/) based IT infrastructure projects that use [Vagrant](https://www.vagrantup.com/) and [Virtualbox](https://www.virtualbox.org/) as tooling for local development. This way one can create, develop and test IT infrastructure scenarios in an local computer.
+A **simple** skeleton for  [Ansible](https://www.ansible.com/) based IT infrastructure projects that use [Vagrant](https://www.vagrantup.com/) and [Virtualbox](https://www.virtualbox.org/) (as default Vagrant provider) as tooling for local development. This way one can create, develop and test IT infrastructure scenarios in an local computer.
 
 ## Requirements
 

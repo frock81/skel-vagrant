@@ -5,9 +5,9 @@ hostname_prefix: {{ cookiecutter.vm_name }}
 # String to be prefixed to ip addresses
 ip_prefix: "{{ cookiecutter.ip_prefix }}"
 
-# Generate ips from ip_prefix + instance_start to instance_end
-instance_start: {{ cookiecutter.instance_start }}
-instance_end: {{ cookiecutter.instance_end }}
+# Generate ips from ip_prefix + instance_index_start to instance_end
+instance_index_start: {{ cookiecutter.instance_index_start }}
+instance_index_end: {{ cookiecutter.instance_index_end }}
 
 # Base ip address and name for the controller.
 # The controller (the one that provisions) will also be the master.

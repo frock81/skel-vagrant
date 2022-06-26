@@ -18,7 +18,7 @@
           hostname_prefix + '-' + item + '.' + domain_name + ' '
           + hostname_prefix + '-' + item }}"
         state: present
-      with_sequence: start={{ instance_start }} end={{ instance_end }}
+      with_sequence: start={{ instance_index_start }} end={{ instance_index_end }}
       tags: hosts
 
     # Causes apt lock acquisition problems.

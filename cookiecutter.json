@@ -7,7 +7,7 @@
     "vm_name": "vm",
     "instance_index_start": 1,
     "instance_index_end": 2,
-    "ip_prefix": "192.168.128.1",
+    "ip_prefix": "192.168.56.1",
     "domain_name": "localdomain",
     "apt_cacher_url": [
         "",

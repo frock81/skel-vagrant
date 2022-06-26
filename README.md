@@ -6,11 +6,11 @@ A **simple** skeleton for  [Ansible](https://www.ansible.com/) based IT infrastr
 
 Tools:
 
-- [Cookiecutter](https://github.com/cookiecutter/cookiecutter) (and so a Python interpreter)
+- [Cookiecutter](https://github.com/cookiecutter/cookiecutter) (and a Python interpreter so)
 - Virtualbox
 - Vagrant
 
-The only tool needed to create the boilerplate project is Cookiecutter, but, for the project to be useful, one needs a Vagrant and Virtualbox working installation. See each tool site for details about install and config. Since it aims Ansible projects, it is assumed that there will be a working Ansible installation too.
+The only tool needed to create the boilerplate project is Cookiecutter, but, for the project to be useful, one needs a Vagrant and Virtualbox working installation. See each tool site for details about installing and configuring. Since it aims Ansible projects, it is assumed that there will be a working Ansible installation too.
 
 Cookiecutter creates the real project boilerplate from the project template.
 
@@ -82,7 +82,7 @@ Defaults to `1`. One may prefer to start from 0, for example (that would result 
 
 ##### instance_index_end
 
-The vm suffix index for the lasa vm that wil be created (for example vm-**3**). Together with the `instance_start` parameter, it will determine the amount of vms. For example, with an `instance_index_start` of 0 and an `instance_index_end` of 2, three vms will be created.
+The vm suffix index for the last vm that wil be created (for example vm-**3**). Together with the `instance_index_start` parameter, it will determine the amount of vms. For example, with an `instance_index_start` of 0 and an `instance_index_end` of 2, three vms will be created.
 
 Defaults to `2` (so two virtual machines will be created in the default config).
 

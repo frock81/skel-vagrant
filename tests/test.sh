@@ -9,16 +9,18 @@ if [[ -d "$DEFAULT_PROJECT_SLUG" ]]; then
     rm -rf "$DEFAULT_PROJECT_SLUG"
 fi
 
-# Cookiecutter the project
-# XXX: perhaps one needs to specify the cookiecutter
-# parameters for a non-interactive execution
+# Cookiecutter the project.
 #
 # Command line options taken from 
 # https://cookiecutter.readthedocs.io/en/1.7.2/advanced/cli_options.html
 #
-#   --default-config: Do not load a config file. Use the defaults instead. There
-#   --overwrite-if-exists: Overwrite the contents of the output directory if it already exists
-#   --no-input: Do not prompt for parameters and only use cookiecutter.json file content
+#   --default-config: Do not load a config file. Use the defaults
+#                     instead. There may be some config from a diferent
+#                     environment.
+#   --overwrite-if-exists: Overwrite the contents of the output
+#                          directory if it already exists
+#   --no-input: Do not prompt for parameters and only use
+#               cookiecutter.json file content
 cookiecutter \
     --default-config \
     --overwrite-if-exists \

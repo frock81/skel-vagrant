@@ -1,7 +1,7 @@
 ---
 - hosts: all
   roles:
-    - role: {{ ansible_bootstrap_role }}
+    - role: {{ cookiecutter.ansible_bootstrap_role }}
       tags: bootstrap
 
 - import_playbook: play_dev.yml

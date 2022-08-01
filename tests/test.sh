@@ -51,13 +51,15 @@ if [[ -d "$DEFAULT_PROJECT_SLUG" ]]; then
             continue
         fi
 
-        if echo "$vm_line" | grep "not created"; then
-            echo "    The machine $vm_name may exist from another environment ('not created')."
-            echo "    If errors persist, it may require manual deletion from the Virtualbox GUI."
-            echo "    For more details see the source code comments."
-            echo "    Continuing"
-            continue
-        fi
+        # XXX: not sure but perhaps this block of code is not
+        #      that really useful.
+        # if echo "$vm_line" | grep "not created"; then
+        #     echo "    The machine $vm_name may exist from another environment ('not created')."
+        #     echo "    If errors persist, it may require manual deletion from the Virtualbox GUI."
+        #     echo "    For more details see the source code comments."
+        #     echo "    Continuing"
+        #     continue
+        # fi
 
         if [[ $DEBUG -eq 1 ]]; then
             echo "    The virtual machine $vm_name may be running or poweroff"

@@ -119,3 +119,11 @@ Defaults to `vm_servers`.
 ##### _copy_without_render
 
 Don't mess with it. Theses are files that Cookiecutter will not process.
+
+##### ansible_bootstrap_role
+
+The role that should be used to bootstrap ansible in the virtual machines.
+
+It used to be hardcoded, but the original role (robertdebock.bootstrap) started breaking things (crucially) and the patches (issue + pull request) were not being taken care of. So it was changed to allow other roles.
+
+Defaults to `frock81.bootstrap` (for now, plans to change as soon as upstream gets updated)

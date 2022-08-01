@@ -16,5 +16,6 @@
     "vm_ansible_group": "{{ cookiecutter.vm_name }}_servers",
     "_copy_without_render": [
         "ansible/play_dev.yml"
-    ]
+    ],
+    "ansible_bootstrap_role": "frock81.bootstrap"
 }

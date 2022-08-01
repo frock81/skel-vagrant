@@ -1,8 +1,5 @@
 ---
 - hosts: all
-  roles:
-    - role: robertdebock.bootstrap
-      tags: bootstrap
   # Use the same values as the Vagrantfile for the next vars.
   vars_files:
     - vars/dev.yml

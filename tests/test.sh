@@ -88,7 +88,7 @@ cookiecutter \
 
 cd_to_project
 if ! vagrant up; then
-    echo Error
+    echo "The test was NOT successful."
     exit 1
 fi
-echo Success
+echo "The test was SUCCESSful."

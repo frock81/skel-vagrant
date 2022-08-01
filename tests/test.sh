@@ -93,4 +93,12 @@ if ! vagrant up; then
     echo "The test was NOT successful."
     exit 1
 fi
-echo "The test was SUCCESSful."
+
+# Clean-up
+for suffix in 1 2 ctrl; do
+    vagrant destroy -f "vm-$suffix"
+done
+cd ..
+rm -rf "$DEFAULT_PROJECT_SLUG"
+
+echo -e "The test was SUCCESSful.\n"

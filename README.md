@@ -6,7 +6,8 @@ A **simple** skeleton for  [Ansible](https://www.ansible.com/) based IT infrastr
 
 Tools:
 
-- [Cookiecutter](https://github.com/cookiecutter/cookiecutter) (and a Python interpreter so)
+- A Python interpreter
+- [Cookiecutter](https://github.com/cookiecutter/cookiecutter)
 - Virtualbox
 - Vagrant
 
@@ -22,7 +23,7 @@ Virtualbox was chosen as the Vagrant provider because the portability between Li
 
 > **TO BE REVIEWED**: review these steps
 
- 1. **"Cookiecutter" the project**: `cookiecutter https://github.com/frock81/skel-vagrant` or, if it is not the first time, `cookiecutter skel-vagrant` (you will be prompted for input)
+ 1. **"Cookiecutter" the project**: `cookiecutter https://github.com/frock81/skel-vagrant.git` or, if it is not the first time, `cookiecutter skel-vagrant` (you will be prompted for input)
  2. create a `~/.ansible_secret` folder with vault files inside it -- vault_pass_insecure (at least, with a [team shared] insecure password in it for development only), vault_pass_sudo (private to each developer), etc.
  3. Cd to the new created directory (new project directory) and issue a `vagrant up`
 
